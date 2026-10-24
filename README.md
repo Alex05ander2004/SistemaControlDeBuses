@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+
 # SistemaControlDeBuses
+
 =======
+
 # AIROVA - Sistema de Control de Buses
 
 Plataforma web para administrar buses, rutas, horarios y turnos, y registrar la asistencia de los trabajadores transportados. Reescritura completa de un proyecto académico, con arquitectura por capas, base de datos versionada y seguridad real.
@@ -45,4 +48,5 @@ npm run dev:web
 ## Autores
 
 Proyecto original: Añazco Huamanquispe, Andre · Vilca Quispe, Frank's Javier · Huisa Perez, Willy Alexander · Huichi Santander, Gersson A. · Jaita Chura, José Manuel.
->>>>>>> f0bf2dc (chore: bootstrap monorepo, docs and CI)
+
+> > > > > > > f0bf2dc (chore: bootstrap monorepo, docs and CI)

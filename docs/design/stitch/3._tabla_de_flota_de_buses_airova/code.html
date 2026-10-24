@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+<html lang="es"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "on-primary-fixed-variant": "#0039b5",
+          "on-tertiary": "#ffffff",
+          "tertiary": "#004870",
+          "on-error": "#ffffff",
+          "on-surface": "#131b2e",
+          "secondary-container": "#fea619",
+          "surface-container": "#eaedff",
+          "surface-tint": "#2151da",
+          "primary-container": "#1d4ed8",
+          "error-container": "#ffdad6",
+          "secondary-fixed-dim": "#ffb95f",
+          "secondary-fixed": "#ffddb8",
+          "on-background": "#131b2e",
+          "primary-fixed-dim": "#b7c4ff",
+          "tertiary-container": "#006194",
+          "on-secondary-fixed": "#2a1700",
+          "outline-variant": "#c4c5d7",
+          "tertiary-fixed": "#cce5ff",
+          "on-secondary-fixed-variant": "#653e00",
+          "on-surface-variant": "#434655",
+          "on-secondary-container": "#684000",
+          "surface-variant": "#dae2fd",
+          "background": "#faf8ff",
+          "surface-container-low": "#f2f3ff",
+          "surface-container-highest": "#dae2fd",
+          "error": "#ba1a1a",
+          "surface-bright": "#faf8ff",
+          "on-error-container": "#93000a",
+          "surface-container-lowest": "#ffffff",
+          "inverse-surface": "#283044",
+          "inverse-on-surface": "#eef0ff",
+          "surface-dim": "#d2d9f4",
+          "inverse-primary": "#b7c4ff",
+          "on-tertiary-container": "#b2d9ff",
+          "surface": "#faf8ff",
+          "on-tertiary-fixed-variant": "#004b73",
+          "surface-container-high": "#e2e7ff",
+          "on-primary-container": "#cad3ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed": "#001d31",
+          "primary-fixed": "#dce1ff",
+          "outline": "#747686",
+          "on-primary-fixed": "#001551",
+          "tertiary-fixed-dim": "#93ccff",
+          "primary": "#0037b0",
+          "on-primary": "#ffffff",
+          "secondary": "#855300"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "space-2xl": "2rem",
+          "margin": "1rem",
+          "space-md": "0.75rem",
+          "gutter-desktop": "1.5rem",
+          "space-xl": "1.5rem",
+          "space-sm": "0.5rem",
+          "gutter": "1rem",
+          "space-lg": "1rem",
+          "space-xs": "0.25rem",
+          "margin-desktop": "2rem"
+        },
+        "fontFamily": {
+          "body-md": [
+            "Inter"
+          ],
+          "headline-lg-mobile": [
+            "Inter"
+          ],
+          "metric-stat": [
+            "Inter"
+          ],
+          "label-sm": [
+            "Inter"
+          ],
+          "label-lg": [
+            "Inter"
+          ],
+          "headline-md": [
+            "Inter"
+          ],
+          "headline-sm": [
+            "Inter"
+          ],
+          "display-lg": [
+            "Inter"
+          ],
+          "label-md": [
+            "Inter"
+          ],
+          "headline-lg": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "body-lg": [
+            "Inter"
+          ]
+        },
+        "fontSize": {
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0",
+              "fontWeight": "400"
+            }
+          ],
+          "headline-lg-mobile": [
+            "24px",
+            {
+              "lineHeight": "32px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "metric-stat": [
+            "28px",
+            {
+              "lineHeight": "34px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "label-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.03em",
+              "fontWeight": "600"
+            }
+          ],
+          "label-lg": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "-0.005em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-md": [
+            "20px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "-0.015em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-lg": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.025em",
+              "fontWeight": "700"
+            }
+          ],
+          "label-md": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "500"
+            }
+          ],
+          "headline-lg": [
+            "30px",
+            {
+              "lineHeight": "38px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "16px",
+              "letterSpacing": "0",
+              "fontWeight": "400"
+            }
+          ],
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0",
+              "fontWeight": "400"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-background font-body-md text-body-md text-on-surface antialiased"><aside class="fixed left-0 top-0 h-full w-64 bg-surface-container-lowest z-50 flex flex-col justify-between shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="flex flex-col"><div class="h-16 px-space-xl flex items-center gap-space-sm bg-surface-container-lowest"><img alt="AIROVA Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1V615egT84GE1jdJwmWdOviELfpRMVB1jr1jqkw04uFCBqauPhhqWGY9SuSaSFRkF_xi18zTbCn01wG9kRW6it2DZlr-14UDPdE1-m0MVx9cCJXP3Xkpcp4AvZbKiR5-u0CvycvJxsl4j4xcvJp_PWEd9_JaWPpu840OxrZUbKOOEYif1vvna5lcTTqgxMZdCgIg_yvXBsKOmH8-drQPFYdMoAMbJHekTdMYlR4hoAPYR3-A0dHWPP8i14"/><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-primary tracking-tight font-bold">AIROVA</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none">Control de Flota</span></div></div><nav class="flex flex-col px-space-md py-space-sm gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="dashboard" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span class="font-label-lg text-label-lg">Dashboard</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="usuarios" href="#"><span class="material-symbols-outlined text-[20px]">group</span><span class="font-label-lg text-label-lg">Usuarios</span></a><a aria-current="page" class="flex items-center gap-space-md px-space-md py-space-sm transition-colors bg-primary-container text-on-primary font-bold rounded-lg" data-path="buses" href="#"><span class="material-symbols-outlined text-[20px]">directions_bus</span><span class="font-label-lg text-label-lg">Buses</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="rutas" href="#"><span class="material-symbols-outlined text-[20px]">navigation</span><span class="font-label-lg text-label-lg">Rutas</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="horarios" href="#"><span class="material-symbols-outlined text-[20px]">schedule</span><span class="font-label-lg text-label-lg">Horarios</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="turnos" href="#"><span class="material-symbols-outlined text-[20px]">calendar_month</span><span class="font-label-lg text-label-lg">Turnos</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="asistencia" href="#"><span class="material-symbols-outlined text-[20px]">how_to_reg</span><span class="font-label-lg text-label-lg">Asistencia</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="reportes" href="#"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-label-lg text-label-lg">Reportes</span></a></nav></div><div class="p-space-md bg-surface-container-lowest flex flex-col gap-space-xs"><nav class="flex flex-col gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-bold rounded-lg"><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="configuracion" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span class="font-label-lg text-label-lg">Configuración</span></a><a class="flex items-center gap-space-md px-space-md py-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" data-path="ayuda-soporte" href="#"><span class="material-symbols-outlined text-[20px]">help_outline</span><span class="font-label-lg text-label-lg">Ayuda / Soporte</span></a></nav><div class="mt-space-sm pt-space-sm flex items-center justify-between px-space-md"><span class="font-label-sm text-label-sm text-on-surface-variant">Versión del Sistema</span><span class="inline-flex items-center px-space-sm py-0.5 rounded-full font-label-sm text-label-sm bg-surface-container-high text-primary font-semibold">v2.4 Pro</span></div></div></aside><div class="pl-64"><header class="fixed top-0 left-64 right-0 h-16 bg-surface-container-lowest/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.04)] z-40 px-gutter-desktop flex items-center justify-between gap-space-lg"><div class="flex-1 max-w-xl"><div class="relative flex items-center"><span class="material-symbols-outlined absolute left-space-md text-on-surface-variant pointer-events-none text-[20px]">search</span><input class="w-full h-10 pl-10 pr-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest transition-all" placeholder="Buscar bus, conductor, turno o ruta... (⌘K)" type="text"/></div></div><div class="flex items-center gap-space-lg shrink-0"><div class="flex items-center gap-space-xs px-space-md py-space-xs rounded-lg bg-surface-container-low text-on-surface"><span class="material-symbols-outlined text-primary text-[18px]">corporate_fare</span><span class="font-label-md text-label-md font-semibold text-on-surface">Planta Central - Lima</span><span class="material-symbols-outlined text-on-surface-variant text-[16px]">expand_more</span></div><button aria-label="Notificaciones" class="relative p-space-sm rounded-lg text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-1 right-1 flex h-4 w-4 items-center justify-center rounded-full bg-error text-on-error font-label-sm text-[10px] font-bold">3</span></button><div class="flex items-center gap-space-md pl-space-sm"><div class="flex flex-col text-right hidden sm:flex"><span class="font-label-lg text-label-lg font-semibold text-on-surface leading-tight">Carlos Mendoza</span><span class="font-label-sm text-label-sm text-on-surface-variant">Supervisor de Operaciones</span></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDx0PaI_Ecaxuu4-CYHa20F-QrDfSSXQW0Kp2bZEmSJptsn7aK4qolxDMopqx9b6DHygvljjWir9wmv34yf0WWTbF6Hdct7RODqysxO4_MkhxzuJDjDQp4oxcnSzzidFn6yovx8PSi3FC9YyMjBugNxApPnBpqExmBh24bZQXnDvLEYdMFryapDWTROW8RSfuQn_EHbRtT7EN1C3vgAnNyyxmqYChY-hy36mj7L2t2NBky3I896eXDE"/></div></div></header><main class="w-full pt-16 min-h-screen bg-background px-gutter-desktop py-space-xl"><div class="flex flex-col w-full">
+<!-- Operational Alert Banner -->
+<section class="mb-space-lg">
+<div class="relative overflow-hidden rounded-xl bg-surface-container-high p-space-md sm:p-space-lg shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-space-md">
+<div class="absolute -right-8 -bottom-8 w-44 h-44 rounded-full bg-secondary-container/20 blur-2xl pointer-events-none"></div>
+<div class="flex items-start sm:items-center gap-space-md z-10">
+<div class="w-10 h-10 rounded-lg bg-secondary-container text-on-secondary-container flex items-center justify-center shrink-0 shadow-sm">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+</div>
+<div>
+<div class="flex items-center gap-space-sm flex-wrap">
+<span class="font-headline-sm text-headline-sm text-on-surface">Alerta de Mantenimiento Crítico</span>
+<span class="px-space-xs py-0.5 rounded-full font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed font-bold">Revisión Preventiva</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">2 buses (<span class="font-semibold text-on-surface">BCW-892</span> y <span class="font-semibold text-on-surface">AZX-410</span>) superaron el límite de 15,000 km sin cambio de frenos y requieren inspección técnica obligatoria.</p>
+</div>
+</div>
+<div class="flex items-center gap-space-sm shrink-0 z-10">
+<button class="px-space-md py-space-sm rounded-lg bg-surface-container-lowest text-on-surface font-label-lg text-label-lg hover:bg-surface-bright transition-colors shadow-sm" type="button">
+          Ver Diagnóstico
+        </button>
+<button class="px-space-md py-space-sm rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-colors shadow-sm" type="button">
+          Agendar Taller
+        </button>
+</div>
+</div>
+</section>
+<!-- Top Bar Section: Title & Primary Actions -->
+<header class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-space-md mb-space-lg">
+<div>
+<div class="flex items-center gap-space-sm mb-1">
+<span class="font-label-sm text-label-sm uppercase tracking-wider text-primary font-bold">Parque Automotor • Telemetría</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Terminal Central Norte</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Gestión de Buses y Unidades</h1>
+<p class="font-body-md text-body-md text-on-surface-variant mt-0.5">Supervisa, filtra y administra las 42 unidades de transporte registradas en el sistema metropolitano.</p>
+</div>
+<!-- Actions & Secondary Nav Controls -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<button class="inline-flex items-center gap-space-xs px-space-md py-2.5 rounded-lg bg-surface-container-lowest text-on-surface font-label-lg text-label-lg hover:bg-surface-container-high transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">file_download</span>
+<span>Exportar CSV/Excel</span>
+</button>
+<button class="inline-flex items-center gap-space-xs px-space-lg py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-all shadow-md hover:shadow-lg" type="button">
+<span class="material-symbols-outlined text-[20px]">add</span>
+<span>Nuevo Bus</span>
+</button>
+</div>
+</header>
+<!-- State Switcher Tabs (Demo & View States) -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-space-md mb-space-md">
+<div class="inline-flex p-1 rounded-xl bg-surface-container-high self-start shadow-sm">
+<button class="px-space-md py-1.5 rounded-lg font-label-lg text-label-lg transition-all bg-surface-container-lowest text-primary shadow-sm font-semibold flex items-center gap-space-xs" id="tab-btn-main" onclick="switchTableView('main')">
+<span class="material-symbols-outlined text-[18px]">table_rows</span>
+<span>Vista Principal (42)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg font-label-lg text-label-lg transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-space-xs" id="tab-btn-skeleton" onclick="switchTableView('skeleton')">
+<span class="material-symbols-outlined text-[18px]">hourglass_empty</span>
+<span>Estado Carga (Skeleton)</span>
+</button>
+<button class="px-space-md py-1.5 rounded-lg font-label-lg text-label-lg transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-space-xs" id="tab-btn-empty" onclick="switchTableView('empty')">
+<span class="material-symbols-outlined text-[18px]">search_off</span>
+<span>Sin Resultados (Empty)</span>
+</button>
+</div>
+<!-- Active Telemetry Metric Micro-Bar -->
+<div class="flex items-center gap-space-lg bg-surface-container-lowest px-space-md py-2 rounded-xl shadow-sm text-on-surface">
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">En Ruta:</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">28</span>
+</div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Disponibles:</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">10</span>
+</div>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-space-xs">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary-container"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Taller:</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold">4</span>
+</div>
+</div>
+</section>
+<!-- Filters, Search & Record Count Card -->
+<section class="bg-surface-container-lowest rounded-xl p-space-md mb-space-lg shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-space-md items-center">
+<!-- Search input -->
+<div class="md:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px] pointer-events-none">search</span>
+<input class="w-full h-10 pl-10 pr-space-md rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md placeholder:text-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary-container transition-all" placeholder="Buscar por placa, modelo o conductor..." type="text"/>
+</div>
+<!-- State Filter Dropdown -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md appearance-none focus:outline-none focus:bg-surface-container-lowest cursor-pointer">
+<option value="todos">Todos los estados</option>
+<option value="en_ruta">Operativo / En ruta</option>
+<option value="disponible">Disponible</option>
+<option value="mantenimiento">En Mantenimiento</option>
+<option value="inactivo">Fuera de servicio</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Bus Type Filter Dropdown -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md appearance-none focus:outline-none focus:bg-surface-container-lowest cursor-pointer">
+<option value="todos">Todos los tipos</option>
+<option value="mini">Minibús 25p</option>
+<option value="estandar">Bus Estándar 40p</option>
+<option value="omnibus">Ómnibus 55p</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Base / Hub Filter Dropdown -->
+<div class="md:col-span-2">
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-8 rounded-lg bg-surface-container-low text-on-surface font-body-md text-body-md appearance-none focus:outline-none focus:bg-surface-container-lowest cursor-pointer">
+<option value="todas">Sede / Base</option>
+<option value="planta_central">Planta Central - Lima</option>
+<option value="callao">Patio Callao</option>
+<option value="lurin">Terminal Sur Lurín</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-[18px]">expand_more</span>
+</div>
+</div>
+<!-- Quick Reset Icon Button -->
+<div class="md:col-span-1 flex justify-end">
+<button class="w-10 h-10 rounded-lg bg-surface-container-low text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors flex items-center justify-center" title="Restablecer filtros" type="button">
+<span class="material-symbols-outlined text-[20px]">filter_alt_off</span>
+</button>
+</div>
+</div>
+<!-- Counter & Active Filters Tag Ribbon -->
+<div class="mt-space-sm pt-space-xs flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs text-on-surface-variant">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold text-primary">Registros activos:</span>
+<span class="font-body-sm text-body-sm font-medium text-on-surface">Mostrando 1-8 de 42 unidades</span>
+</div>
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+          Sede: Planta Central
+          <button aria-label="Remover filtro" class="hover:text-error"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface font-label-sm text-label-sm">
+          Año: 2020-2024
+          <button aria-label="Remover filtro" class="hover:text-error"><span class="material-symbols-outlined text-[14px]">close</span></button>
+</span>
+<button class="font-label-sm text-label-sm text-primary hover:underline font-semibold ml-1">Borrar todos</button>
+</div>
+</div>
+</section>
+<!-- VIEW 1: Modern High-Fidelity Data Table -->
+<section class="flex flex-col" id="view-table-main">
+<div class="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3.5 px-space-md font-semibold" scope="col">Placa</th>
+<th class="py-3.5 px-space-md font-semibold" scope="col">Marca &amp; Modelo</th>
+<th class="py-3.5 px-space-md font-semibold" scope="col">Capacidad / Confort</th>
+<th class="py-3.5 px-space-md font-semibold" scope="col">Kilometraje &amp; Año</th>
+<th class="py-3.5 px-space-md font-semibold" scope="col">Conductor Asignado</th>
+<th class="py-3.5 px-space-md font-semibold" scope="col">Estado Operativo</th>
+<th class="py-3.5 px-space-md font-semibold text-right" scope="col">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-md text-body-md text-on-surface">
+<!-- Row 1: Operativo / En Ruta -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high shadow-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-wider text-on-surface">BCW-892</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-12 h-10 rounded-lg object-cover bg-surface-container shadow-xs shrink-0" data-alt="Close up clean commercial modern Mercedes-Benz city transit coach bus in white and dynamic deep blue corporate livery, parked in sunlight, hyper-realistic 8k automotive photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbtFQUyvoHQyVlkVAvtQJYR9huUkIMZ4w1hY5TldQTuQoFqV7ULdUsYZziuTmCYgroH4E-xrrsQKTYzDfRmdAkkt7ZyIqFx9aW8UAfiqdyQnGGq_0RoTIFKV3KHVHH9Kz1dfvzUpvGzx92qfV-M9PZ-zo9sTzbiVPFjZFdpHiWqMghUZlVYJX4khjVMCS4E-eUCmlERxBJUvBTQvnebDbPkhro7J0mauPIbS5ZBXdCXu56tazyK98R"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Mercedes-Benz OF 1721</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Carrocería Marcopolo Torino</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">airline_seat_recline_normal</span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">40 asientos</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Climatizado • USB Dual</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface">142,500 km</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Año 2022</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of a friendly Peruvian male bus driver Carlos Quispe in clean corporate navy uniform and lanyard, soft natural daytime lighting, professional candid corporate portrait." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXg6tw-TtqTogyUWEQpcuhRWLz_z4E4BKszZOiwUmtTj2HocMoIIjx1QNNegqNgAiAds0pNqU2x4DHikMTnNaSEMhsRUlko6Hf4Gliez1XNd4-AJDH3uvQBpcDFXlAZ-E0Mj43ah--56shBN9wfTb7NQsZaAJ32wJCGNJC0WYsmu78H9cGVPmL0TQM6R7uTvH_wfcFxOtf-Hi0azJkMexZyKqd3UeJ7GwTvGHpv5JAC6WvMcF2rKLs"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Carlos Quispe</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Licencia A-IIIa</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary font-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+<span>En Ruta</span>
+</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mt-0.5">Ruta #104 Norte</span>
+</td>
+<td class="py-3.5 px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Ver Ficha Técnica" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar Unidad" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container transition-colors" title="Opciones avanzadas" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: Operativo / Disponible -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high shadow-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-wider text-on-surface">AZX-410</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-12 h-10 rounded-lg object-cover bg-surface-container shadow-xs shrink-0" data-alt="Modern Scania K310 interurban long coach bus, side three-quarters view, parked at transit terminal bay, clean corporate livery in blue and metallic accents, cinematic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-aq7IUkxyLROHEvy1lcwevtOJLKuj4tc40c1pumxUEVqbSRa6_LwhPwt-OEMlVqp6AL_HLKibqU5NsGUVpKWcmiSA8uBb3vYN1Er4OQaXgNA2dLieGCcIdarJJ0cvyT59PzFJEq1gBmwXuDfGfc48ElkDwZHc88A0NfRc1x36Vw84zxoyIAHigQzKOAvimu31KLYqgBeM9yuy0ADEbDzECMnBTIAjOR9cAvDefbms8s-nYgsgiN47"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Scania K310</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Carrocería Irizar i6</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">airline_seat_recline_extra</span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">50 asientos</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Confort VIP • WiFi 5G</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface">88,200 km</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Año 2023</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of an experienced professional woman transport driver Maria Delgado smiling confidently in clean driver attire with bus terminal background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAm6zPrSO1qtitIVyAnPKyJ6VCM2Uel6MmyjtX6sZtn4fgP2PoXuT-7Obcd5KzZbjH7FS2W7Q53iNrXWqC-vE0Lrp2Vp91UilwWj4zWqoyn8SAeY7p9722yiG-Dxq-zw8G7HvEt3Z7vnXlGI2h2shIlkIN1BD8yeOjGrkpm3m4bnS1uS_h5mRRyjYZTY3qxXZkYNOIo27JCCbfCxUbmpbS1m_p-HFsEz3Zgj7PbbqMlaqe4V3x5HtH4"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">María Delgado</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Licencia A-IIIc</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-emerald-100 text-emerald-800 font-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span>Operativo</span>
+</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mt-0.5">Listo en patio</span>
+</td>
+<td class="py-3.5 px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Ver Ficha Técnica" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar Unidad" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container transition-colors" title="Opciones avanzadas" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Mantenimiento Preventivo -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high shadow-xs">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-wider text-on-surface">VBT-309</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-12 h-10 rounded-lg object-cover bg-surface-container shadow-xs shrink-0" data-alt="Volvo B270F heavy duty commuter passenger bus front angle profile, studio quality shot, white with dark blue accents, realistic lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKTiZCvXHLWYyd5vLINHBtpoOTecd8tldbzJP69hT-J5XsVp4SsK7DpgBD9u7oZvyyOqJpkP1HyvUA59G4GelJkmPzwZHqelS8mPGwmq0J6QuA-aszAPZBXnaRV49W_7_F9tFkTJTNq8Hh-iUWvZq79jb5lvq2oo6C3Zj4kHlhusRl4SKx9cts7eOpraMtqsaB72fZ8io3KgBt3DQSWt9dRhWXj5Mjb3_atGrp-K4IFYT5h3NxIgHQ"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Volvo B270F</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Carrocería Caio Apache VIP</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">airline_seat_recline_normal</span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">45 asientos</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Estándar Industrial</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface">210,400 km</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Año 2020</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Professional mature Hispanic bus driver Jorge Huaman wearing glasses and blue operations collar shirt, neutral industrial depot background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAANcC2YJyoKgcG4Eu66khwJ_FSdGVYAh7gyZLs8G4NzK7z0fW6ErG1LGZ12CRwSQxi8iP4-qZjGd4AuB9Vx-bgHXuYm19WigsLUx0ojZsGxC93b7v4hwC5aOgUEovUns7yuPf7WwYJGKF8qB1zsz-tBPSNJwbguJicy6AJVPN9hq1cCW8cxJSc7EI7kYZ3f_6sgRKocaoDOqHN17JSI6G7aNvCWP_M3m7o3tZl3gxR0-dHll-dLL8t"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Jorge Huamán</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Licencia A-IIIa</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-secondary-fixed text-on-secondary-fixed font-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-secondary-container animate-ping"></span>
+<span>Mantenimiento</span>
+</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mt-0.5">Taller Central • Frenos</span>
+</td>
+<td class="py-3.5 px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Ver Ficha Técnica" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar Unidad" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container transition-colors" title="Opciones avanzadas" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: En Ruta -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high shadow-xs">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-wider text-on-surface">C7R-514</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-12 h-10 rounded-lg object-cover bg-surface-container shadow-xs shrink-0" data-alt="Agrale MT 17.0 standard low-entry metropolitan bus in deep blue livery with white roof, high quality automotive rendering." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPSqY2YTk1NixLJT6WbpwS64gg1BjrZmynWmuxSnQYUH7aite6REkLn_3s6xTPqA3X3Y_o3WHJnu8_HBqyHcCk2zb3nNlcz7PaZdavXw5fCK-18aEzsiZPkPAvPg_5ptpT-ZtwbsGe_1VaL3he_W37yCYBaVheMlDUWYNDvvtHNDED7RRp_4L52uiKWJanzly7x7La6xsSEM0237f_5jHtHcZETd1FAAC07Xr3snNRXOWtxg9VuPRz"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Agrale MT 17.0</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Carrocería Mascarello</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">airline_seat_recline_normal</span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">38 asientos</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Piso Bajo Accesible</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface">63,120 km</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Año 2023</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<img class="w-8 h-8 rounded-full object-cover shrink-0" data-alt="Portrait of young professional bus operator Andres Salazar in company polo shirt, looking at camera with warm friendly confidence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkfBIGZ2Yku9fEsWVGvs8dvxHDhK6F8SmzSr3e1glKTL4EDMz5o54jDlmQkD1W6WCc5otxhiUw0NS2qPD4qUItXOujAxGhFbh09BYyXQ9Gr0iT5s5QGMya6IRV3ZJg5K-6FjZuCVb8UhxnT1bv53eWT4iyZxwcCRT1nSbO-k4YkQKWO2obhihZAKMj3p3NxqUlUO_mzoRqJ3FHRaL2TM-QVD1BKuKnviGyaNI7tpL-spslnFFgGybW"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface truncate">Andrés Salazar</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Licencia A-IIIa</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-primary-container text-on-primary font-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-white animate-pulse"></span>
+<span>En Ruta</span>
+</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mt-0.5">Ruta #202 Callao</span>
+</td>
+<td class="py-3.5 px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Ver Ficha Técnica" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar Unidad" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container transition-colors" title="Opciones avanzadas" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5: Inactivo / Fuera de Servicio -->
+<tr class="hover:bg-surface-container-low/60 transition-colors">
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-surface-container-high shadow-xs">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span class="font-headline-sm text-headline-sm font-bold tracking-wider text-on-surface">W1X-904</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-md">
+<img class="w-12 h-10 rounded-lg object-cover bg-surface-container shadow-xs shrink-0" data-alt="Compact commercial minibús Mercedes-Benz Sprinter 516 CDi for corporate transfer service, parked in depot lot, ultra clean perspective photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIXoOh83fPBxQxvdLjG3AjkEbsHmk8K1itJ5iKHeIKXjTT-uHHcktJCxZus1o-FlTxJSfw0dERLEePNUeaLhk3SUXKzDTa3wSrv0nuWlQSZcqOKDo-rc8KhfqQGtFh80e7xHn1rMXXsKmyUN2fygHOj57_9ckP36DLsbDM5SoGUsAj_mCo3mC4cWsLKtRKjtEVmqzK86NE5qaJ8CnpSDrRdHPjsQ4iIGE6khcZQNwPk41P3fJE07L5"/>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-bold text-on-surface truncate">Mercedes-Benz Sprinter</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Minibús 516 CDi Executive</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[18px]">directions_bus</span>
+<span class="font-label-lg text-label-lg font-semibold text-on-surface">25 asientos</span>
+</div>
+<div class="flex items-center gap-1 mt-1">
+<span class="w-1.5 h-1.5 rounded-full bg-outline"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Ejecutivo • Reclinable</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="font-label-lg text-label-lg font-semibold text-on-surface">198,900 km</div>
+<div class="font-body-sm text-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">calendar_today</span>
+<span>Año 2019</span>
+</div>
+</td>
+<td class="py-3.5 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center text-on-surface-variant font-bold text-label-sm">
+                    --
+                  </div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-lg text-label-lg font-semibold text-on-surface-variant truncate">Sin asignar</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Reserva operativa</span>
+</div>
+</div>
+</td>
+<td class="py-3.5 px-space-md whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full font-label-sm text-label-sm bg-surface-container-high text-on-surface-variant font-bold shadow-xs">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+<span>Inactivo</span>
+</span>
+<span class="block font-label-sm text-label-sm text-on-surface-variant mt-0.5">En cochera secundaria</span>
+</td>
+<td class="py-3.5 px-space-md text-right whitespace-nowrap">
+<div class="inline-flex items-center gap-1">
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-primary hover:bg-surface-container-high transition-colors" title="Ver Ficha Técnica" type="button">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors" title="Editar Unidad" type="button">
+<span class="material-symbols-outlined text-[18px]">edit</span>
+</button>
+<button class="p-1.5 rounded-lg text-on-surface-variant hover:text-error hover:bg-error-container transition-colors" title="Opciones avanzadas" type="button">
+<span class="material-symbols-outlined text-[18px]">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Complete Operational Pagination Footer -->
+<footer class="p-space-md bg-surface-container-lowest flex flex-col sm:flex-row items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-md text-on-surface-variant">
+<div class="flex items-center gap-space-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Mostrar:</span>
+<select class="h-8 px-2 rounded-lg bg-surface-container-low text-on-surface font-label-sm text-label-sm focus:outline-none cursor-pointer">
+<option selected="" value="10">10 por página</option>
+<option value="20">20 por página</option>
+<option value="50">50 por página</option>
+</select>
+</div>
+<span class="font-body-sm text-body-sm">Página <strong class="text-on-surface">1</strong> de <strong>5</strong></span>
+</div>
+<nav aria-label="Paginación de flota" class="flex items-center gap-1">
+<button class="h-8 px-3 rounded-lg bg-surface-container-low text-outline cursor-not-allowed font-label-md text-label-md flex items-center gap-1" disabled="" type="button">
+<span class="material-symbols-outlined text-[16px]">chevron_left</span>
+<span>Anterior</span>
+</button>
+<button class="h-8 w-8 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md font-bold" type="button">1</button>
+<button class="h-8 w-8 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high" type="button">2</button>
+<button class="h-8 w-8 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high hidden sm:inline-flex items-center justify-center" type="button">3</button>
+<span class="px-1 text-on-surface-variant">...</span>
+<button class="h-8 w-8 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high" type="button">5</button>
+<button class="h-8 px-3 rounded-lg bg-surface-container-low text-on-surface font-label-md text-label-md hover:bg-surface-container-high flex items-center gap-1" type="button">
+<span>Siguiente</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+</button>
+</nav>
+</footer>
+</div>
+</section>
+<!-- VIEW 2: Skeleton Loading State Component -->
+<section class="hidden flex flex-col" id="view-table-skeleton">
+<div class="overflow-hidden rounded-xl bg-surface-container-lowest shadow-sm">
+<div class="p-space-md bg-surface-container-low/50 flex items-center justify-between">
+<div class="flex items-center gap-space-xs text-primary font-semibold font-label-md text-label-md animate-pulse">
+<span class="material-symbols-outlined text-[18px]">sync</span>
+<span>Sincronizando telemetría de 42 unidades con el servidor satelital...</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Demostración de Estado de Carga</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm uppercase tracking-wider">
+<th class="py-3.5 px-space-md">Placa</th>
+<th class="py-3.5 px-space-md">Marca &amp; Modelo</th>
+<th class="py-3.5 px-space-md">Capacidad</th>
+<th class="py-3.5 px-space-md">Kilometraje &amp; Año</th>
+<th class="py-3.5 px-space-md">Conductor Asignado</th>
+<th class="py-3.5 px-space-md">Estado</th>
+<th class="py-3.5 px-space-md text-right">Acciones</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-md text-body-md">
+<!-- Skeleton Row 1 -->
+<tr class="animate-pulse">
+<td class="py-4 px-space-md"><div class="h-7 w-24 bg-surface-container-high rounded-md"></div></td>
+<td class="py-4 px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-10 bg-surface-container-high rounded-lg shrink-0"></div>
+<div class="space-y-1.5 flex-1">
+<div class="h-4 w-36 bg-surface-container-high rounded"></div>
+<div class="h-3 w-24 bg-surface-container rounded"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="h-4 w-28 bg-surface-container-high rounded mb-1"></div>
+<div class="h-3 w-20 bg-surface-container rounded"></div>
+</td>
+<td class="py-4 px-space-md">
+<div class="h-4 w-24 bg-surface-container-high rounded mb-1"></div>
+<div class="h-3 w-16 bg-surface-container rounded"></div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high shrink-0"></div>
+<div class="space-y-1">
+<div class="h-3.5 w-24 bg-surface-container-high rounded"></div>
+<div class="h-2.5 w-16 bg-surface-container rounded"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md"><div class="h-6 w-20 bg-surface-container-high rounded-full"></div></td>
+<td class="py-4 px-space-md text-right"><div class="h-6 w-16 bg-surface-container-high rounded inline-block"></div></td>
+</tr>
+<!-- Skeleton Row 2 -->
+<tr class="animate-pulse">
+<td class="py-4 px-space-md"><div class="h-7 w-24 bg-surface-container-high rounded-md"></div></td>
+<td class="py-4 px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-10 bg-surface-container-high rounded-lg shrink-0"></div>
+<div class="space-y-1.5 flex-1">
+<div class="h-4 w-40 bg-surface-container-high rounded"></div>
+<div class="h-3 w-28 bg-surface-container rounded"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="h-4 w-28 bg-surface-container-high rounded mb-1"></div>
+<div class="h-3 w-20 bg-surface-container rounded"></div>
+</td>
+<td class="py-4 px-space-md">
+<div class="h-4 w-24 bg-surface-container-high rounded mb-1"></div>
+<div class="h-3 w-16 bg-surface-container rounded"></div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high shrink-0"></div>
+<div class="space-y-1">
+<div class="h-3.5 w-24 bg-surface-container-high rounded"></div>
+<div class="h-2.5 w-16 bg-surface-container rounded"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md"><div class="h-6 w-20 bg-surface-container-high rounded-full"></div></td>
+<td class="py-4 px-space-md text-right"><div class="h-6 w-16 bg-surface-container-high rounded inline-block"></div></td>
+</tr>
+<!-- Skeleton Row 3 -->
+<tr class="animate-pulse">
+<td class="py-4 px-space-md"><div class="h-7 w-24 bg-surface-container-high rounded-md"></div></td>
+<td class="py-4 px-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-10 bg-surface-container-high rounded-lg shrink-0"></div>
+<div class="space-y-1.5 flex-1">
+<div class="h-4 w-32 bg-surface-container-high rounded"></div>
+<div class="h-3 w-20 bg-surface-container rounded"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md">
+<div class="h-4 w-28 bg-surface-container-high rounded mb-1"></div>
+<div class="h-3 w-20 bg-surface-container rounded"></div>
+</td>
+<td class="py-4 px-space-md">
+<div class="h-4 w-24 bg-surface-container-high rounded mb-1"></div>
+<div class="h-3 w-16 bg-surface-container rounded"></div>
+</td>
+<td class="py-4 px-space-md">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-full bg-surface-container-high shrink-0"></div>
+<div class="space-y-1">
+<div class="h-3.5 w-24 bg-surface-container-high rounded"></div>
+<div class="h-2.5 w-16 bg-surface-container rounded"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-space-md"><div class="h-6 w-20 bg-surface-container-high rounded-full"></div></td>
+<td class="py-4 px-space-md text-right"><div class="h-6 w-16 bg-surface-container-high rounded inline-block"></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- VIEW 3: Empty State Component -->
+<section class="hidden flex flex-col" id="view-table-empty">
+<div class="rounded-xl bg-surface-container-lowest p-space-2xl text-center shadow-sm flex flex-col items-center justify-center min-h-[420px]">
+<div class="relative mb-space-lg">
+<div class="w-24 h-24 rounded-full bg-surface-container-high flex items-center justify-center mx-auto text-primary">
+<span class="material-symbols-outlined text-[48px]">directions_bus</span>
+</div>
+<div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</div>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface font-bold">No se encontraron buses con los filtros seleccionados</h3>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-md mx-auto mt-space-xs">
+        No hay registros que coincidan con los criterios de búsqueda en la sede actual. Prueba ajustando los filtros o registrando un nuevo bus.
+      </p>
+<div class="mt-space-lg flex items-center gap-space-sm flex-wrap justify-center">
+<button class="px-space-lg py-2.5 rounded-lg bg-surface-container-high text-on-surface font-label-lg text-label-lg hover:bg-surface-variant transition-colors inline-flex items-center gap-1.5 shadow-sm" onclick="switchTableView('main')" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span>Limpiar filtros</span>
+</button>
+<button class="px-space-lg py-2.5 rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-colors inline-flex items-center gap-1.5 shadow-sm" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span>Registrar primer bus</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Inline Micro-interactions Script -->
+<script>
+    function switchTableView(state) {
+      const views = {
+        main: document.getElementById('view-table-main'),
+        skeleton: document.getElementById('view-table-skeleton'),
+        empty: document.getElementById('view-table-empty')
+      };
+
+      const tabs = {
+        main: document.getElementById('tab-btn-main'),
+        skeleton: document.getElementById('tab-btn-skeleton'),
+        empty: document.getElementById('tab-btn-empty')
+      };
+
+      // Toggle views visibility
+      Object.keys(views).forEach(key => {
+        if (key === state) {
+          views[key].classList.remove('hidden');
+        } else {
+          views[key].classList.add('hidden');
+        }
+      });
+
+      // Style active tab
+      Object.keys(tabs).forEach(key => {
+        if (key === state) {
+          tabs[key].className = 'px-space-md py-1.5 rounded-lg font-label-lg text-label-lg transition-all bg-surface-container-lowest text-primary shadow-sm font-semibold flex items-center gap-space-xs';
+        } else {
+          tabs[key].className = 'px-space-md py-1.5 rounded-lg font-label-lg text-label-lg transition-all text-on-surface-variant hover:text-on-surface flex items-center gap-space-xs';
+        }
+      });
+    }
+  </script>
+</div></main></div></body></html>
