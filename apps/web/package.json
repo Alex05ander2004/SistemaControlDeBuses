@@ -1,0 +1,6 @@
+{
+  "name": "@airova/web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Frontend de AIROVA (React + Vite + TypeScript). Se genera en la Fase 1."
+}

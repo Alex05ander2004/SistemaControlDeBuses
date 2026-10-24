@@ -1,0 +1,6 @@
+{
+  "name": "@airova/api",
+  "version": "0.1.0",
+  "private": true,
+  "description": "API REST de AIROVA (NestJS + Prisma + PostgreSQL). Se genera en la Fase 2."
+}

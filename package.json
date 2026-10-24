@@ -1,0 +1,25 @@
+{
+  "name": "airova",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AIROVA - Sistema de Control de Buses",
+  "engines": {
+    "node": ">=22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:api": "npm run start:dev --workspace @airova/api",
+    "dev:web": "npm run dev --workspace @airova/web",
+    "build": "npm run build --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.3"
+  }
+}

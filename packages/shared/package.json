@@ -1,0 +1,6 @@
+{
+  "name": "@airova/shared",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tipos y esquemas Zod compartidos entre api y web."
+}
