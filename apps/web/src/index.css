@@ -1,0 +1,63 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+
+/* Tokens tomados de docs/design/stitch/design-system/DESIGN.md */
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+
+  --color-background: #f8fafc;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-card-foreground: #0f172a;
+  --color-muted: #f1f5f9;
+  --color-muted-foreground: #64748b;
+  --color-border: #e2e8f0;
+  --color-input: #e2e8f0;
+  --color-ring: #1d4ed8;
+
+  --color-primary: #1d4ed8;
+  --color-primary-hover: #1e40af;
+  --color-primary-pressed: #172554;
+  --color-primary-foreground: #ffffff;
+  --color-primary-soft: #dce1ff;
+
+  --color-accent: #f59e0b;
+  --color-accent-foreground: #2a1700;
+
+  --color-success: #10b981;
+  --color-success-soft: #d1fae5;
+  --color-success-soft-foreground: #065f46;
+  --color-warning: #d97706;
+  --color-warning-soft: #fef3c7;
+  --color-warning-soft-foreground: #92400e;
+  --color-danger: #ef4444;
+  --color-danger-soft: #fee2e2;
+  --color-danger-soft-foreground: #991b1b;
+  --color-info: #0284c7;
+  --color-info-soft: #e0f2fe;
+  --color-info-soft-foreground: #075985;
+
+  --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.04), 0 1px 2px -1px rgb(15 23 42 / 0.04);
+  --shadow-popover: 0 4px 6px -1px rgb(15 23 42 / 0.07), 0 2px 4px -2px rgb(15 23 42 / 0.05);
+  --shadow-modal: 0 20px 25px -5px rgb(15 23 42 / 0.1), 0 8px 10px -6px rgb(15 23 42 / 0.06);
+}
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Cifras tabulares para conteos, placas y horas (indicación del sistema de diseño) */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+  }
+}
