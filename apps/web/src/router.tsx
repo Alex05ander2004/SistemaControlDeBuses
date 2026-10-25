@@ -6,6 +6,9 @@ import { RedirectIfAuthenticated, RequireAuth } from '@/features/auth/route-guar
 import { BusFormPage } from '@/features/buses/bus-form-page';
 import { BusesPage } from '@/features/buses/buses-page';
 import { DashboardPage } from '@/features/dashboard/dashboard-page';
+import { ShiftDetailPage } from '@/features/shifts/shift-detail-page';
+import { ShiftFormPage } from '@/features/shifts/shift-form-page';
+import { ShiftsPage } from '@/features/shifts/shifts-page';
 import { RouteFormPage } from '@/features/routes/route-form-page';
 import { RoutesPage } from '@/features/routes/routes-page';
 import { ScheduleFormPage } from '@/features/schedules/schedule-form-page';
@@ -40,7 +43,10 @@ export const routes: RouteObject[] = [
               { path: 'horarios', element: <SchedulesPage /> },
               { path: 'horarios/nuevo', element: <ScheduleFormPage /> },
               { path: 'horarios/:id/editar', element: <ScheduleFormPage /> },
-              { path: 'turnos', element: <PlaceholderPage title="Turnos" /> },
+              { path: 'turnos', element: <ShiftsPage /> },
+              { path: 'turnos/nuevo', element: <ShiftFormPage /> },
+              { path: 'turnos/:id', element: <ShiftDetailPage /> },
+              { path: 'turnos/:id/editar', element: <ShiftFormPage /> },
               { path: 'asistencia', element: <PlaceholderPage title="Asistencia" /> },
               { path: 'reportes', element: <PlaceholderPage title="Reportes" /> },
             ],

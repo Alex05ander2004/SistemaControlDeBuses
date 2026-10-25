@@ -84,6 +84,15 @@ export class RoutesService {
   async update(id: string, dto: UpdateRouteDto, actorId: string): Promise<RouteDto> {
     const current = await this.findOrFail(id);
 
+    if (dto.active === false && current.active) {
+      const shifts = await this.prisma.shift.count({ where: { routeId: id, active: true } });
+      if (shifts > 0) {
+        throw new ConflictException(
+          `La ruta tiene ${shifts} ${shifts === 1 ? 'turno activo' : 'turnos activos'}: desactívalos o reasígnalos primero`,
+        );
+      }
+    }
+
     const origin = dto.origin ?? current.origin;
     const destination = dto.destination ?? current.destination;
     this.assertDistinct(origin, destination);

@@ -11,6 +11,7 @@ import { HealthController } from './health/health.controller';
 import { PrismaModule } from './prisma/prisma.module';
 import { RoutesModule } from './routes/routes.module';
 import { SchedulesModule } from './schedules/schedules.module';
+import { ShiftsModule } from './shifts/shifts.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -33,6 +34,7 @@ import { UsersModule } from './users/users.module';
     BusesModule,
     RoutesModule,
     SchedulesModule,
+    ShiftsModule,
   ],
   controllers: [HealthController],
   providers: [

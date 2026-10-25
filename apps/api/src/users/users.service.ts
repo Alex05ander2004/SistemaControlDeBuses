@@ -186,6 +186,18 @@ export class UsersService {
       await this.assertAnotherActiveAdmin(id);
     }
 
+    const stopsDriving =
+      current.role === 'DRIVER' &&
+      (nextRole !== 'DRIVER' || (nextStatus !== 'ACTIVE' && current.status === 'ACTIVE'));
+    if (stopsDriving) {
+      const shifts = await this.prisma.shift.count({ where: { driverId: id, active: true } });
+      if (shifts > 0) {
+        throw new ConflictException(
+          `El conductor tiene ${shifts} ${shifts === 1 ? 'turno activo' : 'turnos activos'}: reasígnalos primero`,
+        );
+      }
+    }
+
     const username = dto.username?.toLowerCase();
     const email = dto.email?.toLowerCase();
     await this.assertUnique({ username, email, dni: dto.dni }, id);

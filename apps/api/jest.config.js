@@ -6,5 +6,7 @@ module.exports = {
   transform: { '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }] },
   testEnvironment: 'node',
   roots: ['<rootDir>/src', '<rootDir>/test'],
-  testTimeout: 60000,
+  // Cada archivo e2e levanta su propia base embebida y su app: pocos workers evitan agotar los tiempos.
+  maxWorkers: 3,
+  testTimeout: 120000,
 };

@@ -119,6 +119,19 @@ export class SchedulesService {
     const arrivalTime = timeToDate(arrival);
     await this.assertUnique(date, departureTime, arrivalTime, id);
 
+    const changesSlot =
+      date.getTime() !== current.date.getTime() ||
+      departureTime.getTime() !== current.departureTime.getTime() ||
+      arrivalTime.getTime() !== current.arrivalTime.getTime();
+    if (changesSlot) {
+      const shifts = await this.prisma.shift.count({ where: { scheduleId: id } });
+      if (shifts > 0) {
+        throw new ConflictException(
+          `No se puede modificar: el horario está asignado a ${shifts} ${shifts === 1 ? 'turno' : 'turnos'}. Reasigna o desactiva esos turnos primero`,
+        );
+      }
+    }
+
     const data: Prisma.ScheduleUpdateInput = {
       ...(dto.date !== undefined && { date }),
       ...(dto.departureTime !== undefined && { departureTime }),

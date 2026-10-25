@@ -30,6 +30,7 @@ export async function createTestContext(): Promise<TestContext> {
   process.env.WEB_ORIGIN = WEB_ORIGIN;
   process.env.NODE_ENV = 'test';
   process.env.THROTTLE_DISABLED = 'true';
+  process.env.DATABASE_POOL_MAX = '1';
 
   // Import diferido: ConfigModule.forRoot lee el entorno al cargar AppModule.
   const { AppModule } = await import('../../src/app.module');

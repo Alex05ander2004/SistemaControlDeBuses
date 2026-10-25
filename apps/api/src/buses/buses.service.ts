@@ -89,6 +89,7 @@ export class BusesService {
   async update(id: string, dto: UpdateBusDto, actorId: string): Promise<BusDto> {
     const current = await this.findOrFail(id);
     if (dto.plate !== undefined) await this.assertPlateFree(dto.plate, id);
+    await this.assertShiftsAllow(id, current, dto);
 
     const data: Prisma.BusUpdateInput = {
       ...(dto.plate !== undefined && { plate: dto.plate }),
@@ -112,6 +113,30 @@ export class BusesService {
       changes: { fields: Object.keys(data) },
     });
     return toBusDto(bus);
+  }
+
+  /** Un bus con turnos activos no puede salir de servicio ni quedarse con menos asientos que pasajeros. */
+  private async assertShiftsAllow(id: string, current: Bus, dto: UpdateBusDto) {
+    const leavingService =
+      dto.status !== undefined && dto.status !== 'ACTIVE' && current.status === 'ACTIVE';
+    const fewerSeats = dto.seats !== undefined && dto.seats < current.seats;
+    if (!leavingService && !fewerSeats) return;
+
+    const shifts = await this.prisma.shift.findMany({
+      where: { busId: id, active: true },
+      select: { _count: { select: { passengers: true } } },
+    });
+    if (leavingService && shifts.length > 0) {
+      throw new ConflictException(
+        `El bus tiene ${shifts.length} ${shifts.length === 1 ? 'turno activo' : 'turnos activos'}: desactívalos o reasígnalos primero`,
+      );
+    }
+    const busiest = Math.max(0, ...shifts.map((shift) => shift._count.passengers));
+    if (fewerSeats && dto.seats! < busiest) {
+      throw new ConflictException(
+        `Un turno activo ya tiene ${busiest} pasajeros: no se pueden reducir los asientos a ${dto.seats}`,
+      );
+    }
   }
 
   private async findOrFail(id: string): Promise<Bus> {
