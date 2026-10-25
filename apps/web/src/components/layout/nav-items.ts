@@ -30,7 +30,7 @@ export const NAV_ITEMS: NavItem[] = [
   { to: '/turnos', label: 'Turnos', icon: CalendarDays, roles: ['ADMIN'] },
   { to: '/asistencia', label: 'Asistencia', icon: ClipboardCheck, roles: ['ADMIN'] },
   { to: '/reportes', label: 'Reportes', icon: FileBarChart, roles: ['ADMIN'] },
-  { to: '/conductor', label: 'Mis turnos', icon: MapPinned, roles: ['DRIVER'], end: true },
+  { to: '/conductor', label: 'Mis turnos', icon: MapPinned, roles: ['DRIVER'], end: false },
   { to: '/colaborador', label: 'Mis turnos', icon: MapPinned, roles: ['WORKER'], end: true },
   { to: '/perfil', label: 'Perfil', icon: UserCircle, roles: ['DRIVER', 'WORKER'] },
 ];

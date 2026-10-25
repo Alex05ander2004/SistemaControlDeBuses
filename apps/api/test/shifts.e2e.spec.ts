@@ -297,8 +297,20 @@ describe('Turnos (e2e)', () => {
       const res = await request(http).get(`/shifts/${shift.id}`).set(auth()).expect(200);
       expect(res.body.passengerCount).toBe(2);
       expect(res.body.passengers).toEqual([
-        { workerId: alfa.id, fullName: 'Alfa Aguirre', dni: alfa.dni, attendance: 'PENDING' },
-        { workerId: zeta.id, fullName: 'Zeta Zurita', dni: zeta.dni, attendance: 'PENDING' },
+        {
+          workerId: alfa.id,
+          fullName: 'Alfa Aguirre',
+          dni: alfa.dni,
+          attendance: 'PENDING',
+          markedAt: null,
+        },
+        {
+          workerId: zeta.id,
+          fullName: 'Zeta Zurita',
+          dni: zeta.dni,
+          attendance: 'PENDING',
+          markedAt: null,
+        },
       ]);
       expect(JSON.stringify(res.body)).not.toMatch(/passwordHash|argon2|email/);
     });

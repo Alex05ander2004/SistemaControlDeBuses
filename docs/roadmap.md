@@ -29,5 +29,5 @@ Migración aplicada, endpoints con validación y guards por rol, UI con estados 
 | Rutas      | Hecho     |
 | Horarios   | Hecho     |
 | Turnos     | Hecho     |
-| Asistencia | Pendiente |
+| Asistencia | Hecho     |
 | Reportes   | Pendiente |

@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
+import { AttendanceModule } from './attendance/attendance.module';
 import { AuthModule } from './auth/auth.module';
 import { BusesModule } from './buses/buses.module';
 import { AuditModule } from './common/audit.service';
@@ -35,6 +36,7 @@ import { UsersModule } from './users/users.module';
     RoutesModule,
     SchedulesModule,
     ShiftsModule,
+    AttendanceModule,
   ],
   controllers: [HealthController],
   providers: [

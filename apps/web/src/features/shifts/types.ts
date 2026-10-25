@@ -23,6 +23,8 @@ export interface PassengerRecord {
   fullName: string;
   dni: string;
   attendance: Attendance;
+  /** ISO; null o ausente si aún no se marcó. */
+  markedAt?: string | null;
 }
 
 export interface ShiftDetail extends ShiftRecord {

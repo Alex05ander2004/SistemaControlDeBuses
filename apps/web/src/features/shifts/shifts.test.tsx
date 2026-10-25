@@ -299,6 +299,71 @@ describe('formulario de turno', () => {
     });
   });
 
+  it('el administrador corrige la asistencia de un pasajero con el PATCH y se ve al instante', async () => {
+    let attendance = 'PENDING';
+    mockApi((url, init) => {
+      if (init.method === 'PATCH') {
+        attendance = bodyOf([url, init]).attendance;
+        return json(200, {
+          workerId: 'w-1',
+          fullName: 'Alfa Aguirre',
+          dni: '10000001',
+          attendance,
+          markedAt: '2026-11-02T11:12:00.000Z',
+        });
+      }
+      if (url.pathname === '/shifts/s-1') {
+        const base = detail();
+        base.passengers[0] = { ...base.passengers[0], attendance: attendance as 'PENDING' };
+        return json(200, base);
+      }
+      return json(404, {});
+    });
+    renderAt('/turnos/s-1');
+
+    const select = await screen.findByLabelText('Asistencia de Alfa Aguirre');
+    await userEvent.selectOptions(select, 'ABSENT');
+
+    await waitFor(() =>
+      expect(callsTo('PATCH', '/shifts/s-1/passengers/w-1/attendance')).toHaveLength(1),
+    );
+    expect(bodyOf(callsTo('PATCH', '/shifts/s-1/passengers/w-1/attendance')[0])).toEqual({
+      attendance: 'ABSENT',
+    });
+    await waitFor(() =>
+      expect(screen.getByLabelText('Asistencia de Alfa Aguirre')).toHaveValue('ABSENT'),
+    );
+    // Con la asistencia marcada ya no se puede quitar al pasajero.
+    expect(screen.getByRole('button', { name: 'Quitar a Alfa Aguirre' })).toBeDisabled();
+  });
+
+  it('si el servidor rechaza la corrección, muestra el error y deja el valor anterior', async () => {
+    mockApi((url, init) => {
+      if (init.method === 'PATCH') return json(409, { message: 'El turno está inactivo' });
+      if (url.pathname === '/shifts/s-1') return json(200, detail());
+      return json(404, {});
+    });
+    renderAt('/turnos/s-1');
+
+    await userEvent.selectOptions(
+      await screen.findByLabelText('Asistencia de Alfa Aguirre'),
+      'PRESENT',
+    );
+
+    expect(await screen.findByRole('alert')).toHaveTextContent('El turno está inactivo');
+    await waitFor(() =>
+      expect(screen.getByLabelText('Asistencia de Alfa Aguirre')).toHaveValue('PENDING'),
+    );
+  });
+
+  it('en un turno inactivo el select de asistencia está deshabilitado', async () => {
+    mockApi((url) =>
+      url.pathname === '/shifts/s-1' ? json(200, detail({ active: false })) : json(404, {}),
+    );
+    renderAt('/turnos/s-1');
+    expect(await screen.findByLabelText('Asistencia de Alfa Aguirre')).toBeDisabled();
+  });
+
   it('informa cuando el turno no existe', async () => {
     mockApi((url) =>
       url.pathname === '/shifts/s-x'
@@ -324,8 +389,9 @@ describe('detalle del turno y pasajeros', () => {
 
     const table = within(screen.getByRole('table'));
     expect(table.getByText('Alfa Aguirre')).toBeInTheDocument();
-    expect(table.getByText('Pendiente')).toBeInTheDocument();
-    expect(table.getByText('Asistió')).toBeInTheDocument();
+    // La asistencia de cada pasajero es un select que el administrador puede corregir.
+    expect(table.getByLabelText('Asistencia de Alfa Aguirre')).toHaveValue('PENDING');
+    expect(table.getByLabelText('Asistencia de Beta Benites')).toHaveValue('PRESENT');
   });
 
   it('asigna pasajeros eligiendo entre los colaboradores libres', async () => {

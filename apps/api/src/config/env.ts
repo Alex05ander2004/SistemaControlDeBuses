@@ -6,6 +6,8 @@ export interface Env {
   JWT_ACCESS_SECRET: string;
   JWT_ACCESS_TTL_SECONDS: number;
   REFRESH_TTL_DAYS: number;
+  /** Zona horaria IANA con la que se decide qué es "hoy" (las fechas de los horarios no llevan zona). */
+  APP_TIMEZONE: string;
 }
 
 /** Convierte duraciones tipo "15m", "1h" o "900" a segundos. */
@@ -47,6 +49,13 @@ export function validateEnv(raw: Record<string, unknown>): Env {
     throw new Error('REFRESH_TTL_DAYS debe ser un entero positivo');
   }
 
+  const timeZone = get('APP_TIMEZONE') ?? 'America/Lima';
+  try {
+    new Intl.DateTimeFormat('en', { timeZone });
+  } catch {
+    throw new Error(`APP_TIMEZONE no es una zona horaria válida: "${timeZone}"`);
+  }
+
   return {
     NODE_ENV: nodeEnv as Env['NODE_ENV'],
     DATABASE_URL: required('DATABASE_URL'),
@@ -55,5 +64,6 @@ export function validateEnv(raw: Record<string, unknown>): Env {
     JWT_ACCESS_SECRET: secret,
     JWT_ACCESS_TTL_SECONDS: parseDurationSeconds(get('JWT_ACCESS_TTL') ?? '15m'),
     REFRESH_TTL_DAYS: refreshDays,
+    APP_TIMEZONE: timeZone,
   };
 }

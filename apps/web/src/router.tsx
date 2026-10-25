@@ -3,6 +3,10 @@ import { AppLayout } from '@/components/layout/app-layout';
 import { PlaceholderPage } from '@/components/placeholder-page';
 import { LoginPage } from '@/features/auth/login-page';
 import { RedirectIfAuthenticated, RequireAuth } from '@/features/auth/route-guards';
+import { AttendanceOverviewPage } from '@/features/attendance/attendance-overview-page';
+import { DriverShiftPage } from '@/features/attendance/driver-shift-page';
+import { DriverShiftsPage } from '@/features/attendance/driver-shifts-page';
+import { WorkerShiftsPage } from '@/features/attendance/worker-shifts-page';
 import { BusFormPage } from '@/features/buses/bus-form-page';
 import { BusesPage } from '@/features/buses/buses-page';
 import { DashboardPage } from '@/features/dashboard/dashboard-page';
@@ -47,17 +51,20 @@ export const routes: RouteObject[] = [
               { path: 'turnos/nuevo', element: <ShiftFormPage /> },
               { path: 'turnos/:id', element: <ShiftDetailPage /> },
               { path: 'turnos/:id/editar', element: <ShiftFormPage /> },
-              { path: 'asistencia', element: <PlaceholderPage title="Asistencia" /> },
+              { path: 'asistencia', element: <AttendanceOverviewPage /> },
               { path: 'reportes', element: <PlaceholderPage title="Reportes" /> },
             ],
           },
           {
             element: <RequireAuth roles={['DRIVER']} />,
-            children: [{ path: 'conductor', element: <PlaceholderPage title="Mis turnos" /> }],
+            children: [
+              { path: 'conductor', element: <DriverShiftsPage /> },
+              { path: 'conductor/turnos/:id', element: <DriverShiftPage /> },
+            ],
           },
           {
             element: <RequireAuth roles={['WORKER']} />,
-            children: [{ path: 'colaborador', element: <PlaceholderPage title="Mis turnos" /> }],
+            children: [{ path: 'colaborador', element: <WorkerShiftsPage /> }],
           },
           {
             element: <RequireAuth roles={['DRIVER', 'WORKER']} />,

@@ -19,16 +19,16 @@ type Tx = Prisma.TransactionClient;
  */
 const SHIFT_LOCK_KEY = 424242;
 
-const shiftInclude = {
+export const shiftInclude = {
   route: true,
   schedule: true,
   bus: true,
   driver: true,
   _count: { select: { passengers: true } },
 } satisfies Prisma.ShiftInclude;
-type ShiftRecord = Prisma.ShiftGetPayload<{ include: typeof shiftInclude }>;
+export type ShiftRecord = Prisma.ShiftGetPayload<{ include: typeof shiftInclude }>;
 
-const detailInclude = {
+export const detailInclude = {
   ...shiftInclude,
   passengers: { include: { worker: true }, orderBy: { worker: { fullName: 'asc' } } },
 } satisfies Prisma.ShiftInclude;
@@ -49,6 +49,7 @@ export interface PassengerDto {
   fullName: string;
   dni: string;
   attendance: Attendance;
+  markedAt: string | null;
 }
 
 export interface ShiftDetailDto extends ShiftDto {
@@ -77,7 +78,7 @@ export function toShiftDto(shift: ShiftRecord): ShiftDto {
   };
 }
 
-function toShiftDetail(shift: ShiftDetailRecord): ShiftDetailDto {
+export function toShiftDetail(shift: ShiftDetailRecord): ShiftDetailDto {
   return {
     ...toShiftDto(shift),
     passengers: shift.passengers.map((passenger) => ({
@@ -85,6 +86,7 @@ function toShiftDetail(shift: ShiftDetailRecord): ShiftDetailDto {
       fullName: passenger.worker.fullName,
       dni: passenger.worker.dni,
       attendance: passenger.attendance,
+      markedAt: passenger.markedAt?.toISOString() ?? null,
     })),
   };
 }

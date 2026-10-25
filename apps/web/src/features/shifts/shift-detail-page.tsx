@@ -19,12 +19,15 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ConfirmDialog } from '@/components/ui/confirm-dialog';
+import { Select } from '@/components/ui/select';
+import { useMarkAttendance } from '@/features/attendance/attendance-api';
+import { formatMarkedAt } from '@/features/attendance/types';
 import { formatDuration, formatScheduleDate, minutesBetween } from '@/features/schedules/types';
 import { ApiError } from '@/lib/api';
 import { AssignPassengersPanel } from './assign-passengers-panel';
 import { OccupancyBar } from './occupancy-bar';
 import { useRemovePassenger, useSetShiftActive, useShift } from './shifts-api';
-import { ATTENDANCE_LABEL, ATTENDANCE_TONE, occupancy, type PassengerRecord } from './types';
+import { ATTENDANCE_LABEL, occupancy, type Attendance, type PassengerRecord } from './types';
 
 export function ShiftDetailPage() {
   const { id } = useParams();
@@ -32,6 +35,7 @@ export function ShiftDetailPage() {
   const shift = useShift(id);
   const setActive = useSetShiftActive();
   const removePassenger = useRemovePassenger(id ?? '');
+  const markAttendance = useMarkAttendance(id ?? '');
 
   const [notice, setNotice] = useState<string | null>(
     (location.state as { notice?: string } | null)?.notice ?? null,
@@ -73,6 +77,16 @@ export function ShiftDetailPage() {
       setError(caught instanceof ApiError ? caught.message : 'No se pudo cambiar el estado.');
     } finally {
       setTogglePending(false);
+    }
+  }
+
+  /** El administrador puede corregir la asistencia de cualquier pasajero del turno. */
+  async function correctAttendance(passenger: PassengerRecord, attendance: Attendance) {
+    setError(null);
+    try {
+      await markAttendance.mutateAsync({ workerId: passenger.workerId, attendance });
+    } catch (caught) {
+      setError(caught instanceof ApiError ? caught.message : 'No se pudo registrar la asistencia.');
     }
   }
 
@@ -267,9 +281,26 @@ export function ShiftDetailPage() {
                   <td className="px-4 py-2 font-medium">{passenger.fullName}</td>
                   <td className="tnum hidden px-4 py-2 sm:table-cell">{passenger.dni}</td>
                   <td className="px-4 py-2">
-                    <Badge tone={ATTENDANCE_TONE[passenger.attendance]}>
-                      {ATTENDANCE_LABEL[passenger.attendance]}
-                    </Badge>
+                    <Select
+                      aria-label={`Asistencia de ${passenger.fullName}`}
+                      className="h-9 w-32"
+                      disabled={!data.active}
+                      value={passenger.attendance}
+                      onChange={(event) =>
+                        correctAttendance(passenger, event.target.value as Attendance)
+                      }
+                    >
+                      {(Object.keys(ATTENDANCE_LABEL) as Attendance[]).map((value) => (
+                        <option key={value} value={value}>
+                          {ATTENDANCE_LABEL[value]}
+                        </option>
+                      ))}
+                    </Select>
+                    {passenger.markedAt && (
+                      <p className="tnum mt-1 text-xs text-muted-foreground">
+                        Marcado a las {formatMarkedAt(passenger.markedAt)}
+                      </p>
+                    )}
                   </td>
                   <td className="px-4 py-2 text-right">
                     <Button
