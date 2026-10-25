@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AuthModule } from './auth/auth.module';
+import { AuditModule } from './common/audit.service';
 import { JwtAuthGuard, RolesGuard } from './auth/guards';
 import { validateEnv } from './config/env';
 import { HealthController } from './health/health.controller';
@@ -23,6 +24,7 @@ import { UsersModule } from './users/users.module';
       skipIf: () => process.env.NODE_ENV === 'test' && process.env.THROTTLE_DISABLED === 'true',
     }),
     PrismaModule,
+    AuditModule,
     AuthModule,
     UsersModule,
   ],

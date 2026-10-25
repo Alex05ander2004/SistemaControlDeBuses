@@ -4,6 +4,8 @@ import { PlaceholderPage } from '@/components/placeholder-page';
 import { LoginPage } from '@/features/auth/login-page';
 import { RedirectIfAuthenticated, RequireAuth } from '@/features/auth/route-guards';
 import { DashboardPage } from '@/features/dashboard/dashboard-page';
+import { UserFormPage } from '@/features/users/user-form-page';
+import { UsersPage } from '@/features/users/users-page';
 
 export const routes: RouteObject[] = [
   {
@@ -20,7 +22,9 @@ export const routes: RouteObject[] = [
             element: <RequireAuth roles={['ADMIN']} />,
             children: [
               { index: true, element: <DashboardPage /> },
-              { path: 'usuarios', element: <PlaceholderPage title="Usuarios" /> },
+              { path: 'usuarios', element: <UsersPage /> },
+              { path: 'usuarios/nuevo', element: <UserFormPage /> },
+              { path: 'usuarios/:id/editar', element: <UserFormPage /> },
               { path: 'buses', element: <PlaceholderPage title="Buses" /> },
               { path: 'rutas', element: <PlaceholderPage title="Rutas" /> },
               { path: 'horarios', element: <PlaceholderPage title="Horarios" /> },

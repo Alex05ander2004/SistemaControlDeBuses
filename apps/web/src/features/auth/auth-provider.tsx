@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
+import { AUTH_EXPIRED_EVENT } from '@/lib/api';
 import * as authService from './auth-service';
 import { AuthContext, type AuthContextValue } from './auth-context';
 import type { AuthUser, LoginCredentials } from './types';
@@ -17,6 +18,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => {
       active = false;
     };
+  }, []);
+
+  // La sesión caducó y no se pudo renovar: se limpia el estado y los guards llevan al login.
+  useEffect(() => {
+    const onExpired = () => {
+      setUser(null);
+      setStatus('anonymous');
+    };
+    window.addEventListener(AUTH_EXPIRED_EVENT, onExpired);
+    return () => window.removeEventListener(AUTH_EXPIRED_EVENT, onExpired);
   }, []);
 
   const login = useCallback(async (credentials: LoginCredentials) => {

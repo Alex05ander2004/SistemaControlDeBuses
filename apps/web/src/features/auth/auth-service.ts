@@ -1,4 +1,4 @@
-import { ApiError, apiFetch, setAccessToken } from '@/lib/api';
+import { ApiError, apiFetch, setAccessToken, setRefreshHandler } from '@/lib/api';
 import type { AuthUser, LoginCredentials } from './types';
 
 interface SessionResponse {
@@ -54,3 +54,6 @@ export async function logout(): Promise<void> {
   if (useMock) return;
   await apiFetch<void>('/auth/logout', { method: 'POST' }).catch(() => undefined);
 }
+
+// Ante un 401 en cualquier petición, apiFetch renueva la sesión con la cookie de refresh.
+if (!useMock) setRefreshHandler(async () => (await restoreSession()) !== null);

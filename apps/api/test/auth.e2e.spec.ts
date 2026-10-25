@@ -174,7 +174,7 @@ describe('Auth y RBAC (e2e)', () => {
         .set('Authorization', `Bearer ${body.accessToken}`)
         .expect(200);
 
-      expect(res.body.length).toBeGreaterThan(0);
+      expect(res.body.items.length).toBeGreaterThan(0);
       expect(JSON.stringify(res.body)).not.toMatch(/passwordHash|argon2/);
     });
 
