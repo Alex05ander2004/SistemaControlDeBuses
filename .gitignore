@@ -14,3 +14,7 @@ Thumbs.db
 .idea/
 uploads/
 .claude/settings.local.json
+
+# Prisma client generado
+apps/api/src/generated/
+*.tsbuildinfo

@@ -3,8 +3,8 @@
 | Fase | Contenido                                                                                                 | Estado    |
 | ---- | --------------------------------------------------------------------------------------------------------- | --------- |
 | 0    | Fundamentos: monorepo, convenciones, Docker, CI, ADR, docs                                                | Hecha     |
-| 1    | Diseño: requisitos, modelo ER, sistema de diseño (Stitch), scaffold de `web`                              | En curso  |
-| 2    | Backend base: scaffold NestJS, Prisma, migraciones, seed, auth + RBAC                                     | Pendiente |
+| 1    | Diseño: requisitos, modelo ER, sistema de diseño (Stitch), scaffold de `web`                              | Hecha     |
+| 2    | Backend base: scaffold NestJS, Prisma, migraciones, seed, auth + RBAC                                     | Hecha     |
 | 3    | Módulos (vertical API + UI + tests): Usuarios → Buses → Rutas → Horarios → Turnos → Asistencia → Reportes | Pendiente |
 | 4    | Calidad: revisión de código, auditoría de seguridad, E2E, accesibilidad                                   | Pendiente |
 | 5    | Despliegue y documentación final                                                                          | Pendiente |

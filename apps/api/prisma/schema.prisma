@@ -1,0 +1,196 @@
+// Modelo de datos de AIROVA. Ver docs/data-model.md.
+
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  WORKER
+  DRIVER
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum Sex {
+  MALE
+  FEMALE
+}
+
+enum BusStatus {
+  ACTIVE
+  MAINTENANCE
+  RETIRED
+}
+
+enum Attendance {
+  PENDING
+  PRESENT
+  ABSENT
+}
+
+model User {
+  id           String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  fullName     String     @map("full_name") @db.VarChar(120)
+  username     String     @unique @db.VarChar(50)
+  email        String     @unique @db.VarChar(120)
+  passwordHash String     @map("password_hash")
+  dni          String     @unique @db.VarChar(20)
+  birthDate    DateTime   @map("birth_date") @db.Date
+  sex          Sex
+  phone        String?    @db.VarChar(20)
+  address      String?    @db.VarChar(200)
+  role         Role
+  status       UserStatus @default(ACTIVE)
+  photoUrl     String?    @map("photo_url")
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  drivenShifts     Shift[]          @relation("ShiftDriver")
+  passengerOf      ShiftPassenger[] @relation("PassengerWorker")
+  markedAttendance ShiftPassenger[] @relation("PassengerMarkedBy")
+  reports          Report[]
+  refreshTokens    RefreshToken[]
+  auditLogs        AuditLog[]
+
+  @@index([role, status])
+  @@map("users")
+}
+
+model Bus {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  plate     String    @unique @db.VarChar(10)
+  brand     String    @db.VarChar(60)
+  model     String    @db.VarChar(60)
+  seats     Int
+  status    BusStatus @default(ACTIVE)
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime  @updatedAt @map("updated_at")
+
+  shifts Shift[]
+
+  @@map("buses")
+}
+
+model Route {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  origin      String   @db.VarChar(120)
+  destination String   @db.VarChar(120)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  shifts Shift[]
+
+  @@map("routes")
+}
+
+model Schedule {
+  id            String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  date          DateTime @db.Date
+  departureTime DateTime @map("departure_time") @db.Time(0)
+  arrivalTime   DateTime @map("arrival_time") @db.Time(0)
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  shifts Shift[]
+
+  @@index([date])
+  @@map("schedules")
+}
+
+model Shift {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  routeId    String   @map("route_id") @db.Uuid
+  scheduleId String   @map("schedule_id") @db.Uuid
+  busId      String   @map("bus_id") @db.Uuid
+  driverId   String   @map("driver_id") @db.Uuid
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  route      Route            @relation(fields: [routeId], references: [id], onDelete: Restrict)
+  schedule   Schedule         @relation(fields: [scheduleId], references: [id], onDelete: Restrict)
+  bus        Bus              @relation(fields: [busId], references: [id], onDelete: Restrict)
+  driver     User             @relation("ShiftDriver", fields: [driverId], references: [id], onDelete: Restrict)
+  passengers ShiftPassenger[]
+  reports    Report[]
+
+  @@index([routeId])
+  @@index([scheduleId])
+  @@index([busId])
+  @@index([driverId])
+  @@map("shifts")
+}
+
+model ShiftPassenger {
+  id         String     @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  shiftId    String     @map("shift_id") @db.Uuid
+  workerId   String     @map("worker_id") @db.Uuid
+  attendance Attendance @default(PENDING)
+  markedAt   DateTime?  @map("marked_at")
+  markedById String?    @map("marked_by") @db.Uuid
+  createdAt  DateTime   @default(now()) @map("created_at")
+  updatedAt  DateTime   @updatedAt @map("updated_at")
+
+  shift    Shift @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  worker   User  @relation("PassengerWorker", fields: [workerId], references: [id], onDelete: Restrict)
+  markedBy User? @relation("PassengerMarkedBy", fields: [markedById], references: [id], onDelete: SetNull)
+
+  @@unique([shiftId, workerId])
+  @@index([workerId])
+  @@map("shift_passengers")
+}
+
+model Report {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  shiftId   String   @map("shift_id") @db.Uuid
+  authorId  String   @map("author_id") @db.Uuid
+  notes     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  shift  Shift @relation(fields: [shiftId], references: [id], onDelete: Cascade)
+  author User  @relation(fields: [authorId], references: [id], onDelete: Restrict)
+
+  @@index([shiftId])
+  @@map("reports")
+}
+
+model RefreshToken {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @unique @map("token_hash")
+  expiresAt DateTime  @map("expires_at")
+  revokedAt DateTime? @map("revoked_at")
+  createdAt DateTime  @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("refresh_tokens")
+}
+
+model AuditLog {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  userId    String?  @map("user_id") @db.Uuid
+  action    String   @db.VarChar(60)
+  entity    String   @db.VarChar(60)
+  entityId  String?  @map("entity_id")
+  changes   Json?
+  createdAt DateTime @default(now()) @map("created_at")
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([entity, entityId])
+  @@map("audit_logs")
+}

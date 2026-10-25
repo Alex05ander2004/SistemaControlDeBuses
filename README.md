@@ -8,7 +8,7 @@
 
 Plataforma web para administrar buses, rutas, horarios y turnos, y registrar la asistencia de los trabajadores transportados. Reescritura completa de un proyecto académico, con arquitectura por capas, base de datos versionada y seguridad real.
 
-> Estado: **Fase 0 (fundamentos)**. Aún no hay código de aplicación.
+> Estado: **Fase 2 completada** (frontend base, API con autenticación y roles). Los módulos de negocio llegan en la Fase 3.
 
 ## Roles
 
@@ -27,15 +27,47 @@ React + Vite + TypeScript · NestJS · Prisma · PostgreSQL 16 · JWT · Docker 
 - Node.js 22 (ver `.nvmrc`)
 - Docker Desktop (para PostgreSQL local)
 
-## Puesta en marcha (disponible desde la Fase 2)
+## Puesta en marcha
+
+1. Copia la configuración y completa los secretos:
+
+   ```sh
+   cp .env.example .env
+   ```
+
+   Genera `JWT_ACCESS_SECRET` con `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"` y define `SEED_ADMIN_PASSWORD` (mínimo 12 caracteres).
+
+2. Levanta PostgreSQL, con Docker (`docker compose up -d db`) o con un PostgreSQL propio. En ese caso crea la base y el usuario y ajusta `DATABASE_URL`:
+
+   ```sql
+   CREATE USER airova WITH PASSWORD 'tu_clave';
+   CREATE DATABASE airova OWNER airova;
+   ```
+
+3. Instala, migra y carga el usuario administrador:
+
+   ```sh
+   npm install
+   npm run db:deploy --workspace @airova/api
+   npm run db:seed --workspace @airova/api
+   ```
+
+4. Arranca la API y la web, cada una en su terminal:
+
+   ```sh
+   npm run dev:api   # http://localhost:3001
+   npm run dev:web   # http://localhost:5173
+   ```
+
+Inicia sesión con el usuario `admin` (o `SEED_ADMIN_USERNAME`) y la contraseña de `SEED_ADMIN_PASSWORD`. Con `SEED_SAMPLE_DATA=true` el seed crea además un conductor y un colaborador (`conductor` y `colaborador`, misma contraseña), buses, una ruta, un horario y un turno de ejemplo.
+
+## Pruebas
 
 ```sh
-cp .env.example .env      # completar secretos
-docker compose up -d db   # levanta PostgreSQL
-npm install
-npm run dev:api
-npm run dev:web
+npm test
 ```
+
+Los tests de la API usan PostgreSQL embebido (PGlite) con las migraciones reales: no necesitan Docker ni una base de datos externa.
 
 ## Documentación
 

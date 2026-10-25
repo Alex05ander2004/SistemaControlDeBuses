@@ -29,16 +29,24 @@ export async function login(credentials: LoginCredentials): Promise<AuthUser> {
   return session.user;
 }
 
-/** Recupera la sesión usando la cookie de refresh. Devuelve null si no hay sesión. */
-export async function restoreSession(): Promise<AuthUser | null> {
-  if (useMock) return null;
-  try {
-    const session = await apiFetch<SessionResponse>('/auth/refresh', { method: 'POST' });
-    setAccessToken(session.accessToken);
-    return session.user;
-  } catch {
-    return null;
-  }
+let pendingRestore: Promise<AuthUser | null> | null = null;
+
+/**
+ * Recupera la sesión usando la cookie de refresh. Devuelve null si no hay sesión.
+ * Las llamadas simultáneas comparten una sola petición: el refresh token rota en cada uso.
+ */
+export function restoreSession(): Promise<AuthUser | null> {
+  if (useMock) return Promise.resolve(null);
+  pendingRestore ??= apiFetch<SessionResponse>('/auth/refresh', { method: 'POST' })
+    .then((session) => {
+      setAccessToken(session.accessToken);
+      return session.user;
+    })
+    .catch(() => null)
+    .finally(() => {
+      pendingRestore = null;
+    });
+  return pendingRestore;
 }
 
 export async function logout(): Promise<void> {
