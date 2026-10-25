@@ -8,8 +8,8 @@ import { Brand } from '@/components/brand';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { ApiError } from '@/lib/api';
 import { useAuth } from './auth-context';
+import { loginErrorMessage } from './login-errors';
 import { HOME_BY_ROLE } from './types';
 
 const loginSchema = z.object({
@@ -37,11 +37,7 @@ export function LoginPage() {
       const user = await login(values);
       navigate(HOME_BY_ROLE[user.role], { replace: true });
     } catch (error) {
-      setFormError(
-        error instanceof ApiError && error.status === 401
-          ? 'Usuario o contraseña incorrectos'
-          : 'No se pudo iniciar sesión. Intenta nuevamente.',
-      );
+      setFormError(loginErrorMessage(error));
     }
   }
 

@@ -8,7 +8,8 @@ export default defineConfig({
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },
   },
-  server: { port: 5173 },
+  // strictPort: si el 5173 está ocupado, falla en vez de abrirse en otro puerto que la API (CORS) rechazaría.
+  server: { port: 5173, strictPort: true },
   test: {
     environment: 'happy-dom',
     setupFiles: ['./src/test/setup.ts'],

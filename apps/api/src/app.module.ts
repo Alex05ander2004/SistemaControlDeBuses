@@ -3,11 +3,14 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_GUARD } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { AuthModule } from './auth/auth.module';
+import { BusesModule } from './buses/buses.module';
 import { AuditModule } from './common/audit.service';
 import { JwtAuthGuard, RolesGuard } from './auth/guards';
 import { validateEnv } from './config/env';
 import { HealthController } from './health/health.controller';
 import { PrismaModule } from './prisma/prisma.module';
+import { RoutesModule } from './routes/routes.module';
+import { SchedulesModule } from './schedules/schedules.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -27,6 +30,9 @@ import { UsersModule } from './users/users.module';
     AuditModule,
     AuthModule,
     UsersModule,
+    BusesModule,
+    RoutesModule,
+    SchedulesModule,
   ],
   controllers: [HealthController],
   providers: [

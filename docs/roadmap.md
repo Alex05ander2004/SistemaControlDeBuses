@@ -25,9 +25,9 @@ Migración aplicada, endpoints con validación y guards por rol, UI con estados 
 | Módulo     | Estado    |
 | ---------- | --------- |
 | Usuarios   | Hecho     |
-| Buses      | Pendiente |
-| Rutas      | Pendiente |
-| Horarios   | Pendiente |
+| Buses      | Hecho     |
+| Rutas      | Hecho     |
+| Horarios   | Hecho     |
 | Turnos     | Pendiente |
 | Asistencia | Pendiente |
 | Reportes   | Pendiente |
