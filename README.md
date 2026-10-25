@@ -37,7 +37,7 @@ React + Vite + TypeScript · NestJS · Prisma · PostgreSQL 16 · JWT · Docker 
 
    Genera `JWT_ACCESS_SECRET` con `node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"` y define `SEED_ADMIN_PASSWORD` (mínimo 12 caracteres).
 
-2. Levanta PostgreSQL, con Docker (`docker compose up -d db`) o con un PostgreSQL propio. En ese caso crea la base y el usuario y ajusta `DATABASE_URL`:
+2. Levanta PostgreSQL, con Docker (`docker compose up -d db`, expuesto en el puerto **5433** para no chocar con un PostgreSQL local en el 5432) o con un PostgreSQL propio. En ese caso crea la base y el usuario y ajusta `DATABASE_URL`:
 
    ```sql
    CREATE USER airova WITH PASSWORD 'tu_clave';
