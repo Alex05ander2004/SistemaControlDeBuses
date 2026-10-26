@@ -5,6 +5,7 @@ import {
   CalendarDays,
   CheckCircle2,
   Clock,
+  FileText,
   Pencil,
   Power,
   PowerOff,
@@ -139,6 +140,12 @@ export function ShiftDetailPage() {
               <Link to={`/turnos/${data.id}/editar`}>
                 <Pencil className="size-4" aria-hidden />
                 Editar
+              </Link>
+            </Button>
+            <Button asChild variant="secondary">
+              <Link to={`/reportes/nuevo?shiftId=${data.id}`}>
+                <FileText className="size-4" aria-hidden />
+                Crear informe
               </Link>
             </Button>
             <Button variant="secondary" onClick={() => setTogglePending(true)}>

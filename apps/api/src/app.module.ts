@@ -10,6 +10,7 @@ import { JwtAuthGuard, RolesGuard } from './auth/guards';
 import { validateEnv } from './config/env';
 import { HealthController } from './health/health.controller';
 import { PrismaModule } from './prisma/prisma.module';
+import { ReportsModule } from './reports/reports.module';
 import { RoutesModule } from './routes/routes.module';
 import { SchedulesModule } from './schedules/schedules.module';
 import { ShiftsModule } from './shifts/shifts.module';
@@ -37,6 +38,7 @@ import { UsersModule } from './users/users.module';
     SchedulesModule,
     ShiftsModule,
     AttendanceModule,
+    ReportsModule,
   ],
   controllers: [HealthController],
   providers: [

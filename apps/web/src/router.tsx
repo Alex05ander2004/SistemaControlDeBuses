@@ -13,6 +13,8 @@ import { DashboardPage } from '@/features/dashboard/dashboard-page';
 import { ShiftDetailPage } from '@/features/shifts/shift-detail-page';
 import { ShiftFormPage } from '@/features/shifts/shift-form-page';
 import { ShiftsPage } from '@/features/shifts/shifts-page';
+import { ReportFormPage } from '@/features/reports/report-form-page';
+import { ReportsPage } from '@/features/reports/reports-page';
 import { RouteFormPage } from '@/features/routes/route-form-page';
 import { RoutesPage } from '@/features/routes/routes-page';
 import { ScheduleFormPage } from '@/features/schedules/schedule-form-page';
@@ -52,7 +54,9 @@ export const routes: RouteObject[] = [
               { path: 'turnos/:id', element: <ShiftDetailPage /> },
               { path: 'turnos/:id/editar', element: <ShiftFormPage /> },
               { path: 'asistencia', element: <AttendanceOverviewPage /> },
-              { path: 'reportes', element: <PlaceholderPage title="Reportes" /> },
+              { path: 'reportes', element: <ReportsPage /> },
+              { path: 'reportes/nuevo', element: <ReportFormPage /> },
+              { path: 'reportes/:id/editar', element: <ReportFormPage /> },
             ],
           },
           {

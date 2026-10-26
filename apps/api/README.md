@@ -38,6 +38,13 @@ API REST de AIROVA: NestJS 11 + Prisma 7 + PostgreSQL 16.
 | GET    | `/my/shifts/:id`                              | DRIVER, WORKER | Detalle de un turno propio (conductor: manifiesto; colaborador: solo lo suyo). 404 si no es suyo                                 |
 | PATCH  | `/shifts/:id/passengers/:workerId/attendance` | ADMIN, DRIVER  | Marca `PRESENT`, `ABSENT` o deshace con `PENDING`                                                                                |
 | GET    | `/attendance/overview`                        | ADMIN          | Resumen de asistencia de los turnos activos de un día (`date`, hoy por defecto)                                                  |
+| GET    | `/reports`                                    | ADMIN          | Informes por turno, más recientes primero. Filtros: `from`, `to` (fecha del turno), `shiftId`, `search`, `page`, `pageSize`      |
+| GET    | `/reports/:id`                                | ADMIN          | Un informe                                                                                                                       |
+| POST   | `/reports`                                    | ADMIN          | Crea un informe (`shiftId`, `notes` de 3 a 2000 caracteres)                                                                      |
+| PATCH  | `/reports/:id`                                | ADMIN          | Edita solo el texto (`notes`)                                                                                                    |
+| DELETE | `/reports/:id`                                | ADMIN          | Elimina un informe (204)                                                                                                         |
+| GET    | `/reports/attendance`                         | ADMIN          | Reporte de asistencia por rango: resumen + filas paginadas. Filtros: `from`, `to`, `shiftId`, `attendance`, `page`, `pageSize`   |
+| GET    | `/reports/attendance.csv`                     | ADMIN          | Exporta ese reporte como CSV (mismos filtros, sin paginar)                                                                       |
 
 Todo lo no marcado `@Public()` exige `Authorization: Bearer <accessToken>`. `@Roles()` restringe por rol. Ver ADR 0003.
 
@@ -91,6 +98,14 @@ npm test --workspace @airova/api
 - **Privacidad:** el colaborador nunca recibe la lista de los demás pasajeros ni sus datos.
 - Una vez marcada la asistencia, el pasajero ya no se puede quitar del turno.
 
+## Reglas de Reportes
+
+- **Informes por turno:** los crea el administrador; el autor queda registrado. Se permiten varios por turno (también en turnos pasados o inactivos, por ejemplo para documentar una cancelación), pero no en turnos **futuros** (409). Solo se edita el texto: el turno y el autor no cambian. Al borrar un turno se borran sus informes.
+- **Reporte de asistencia:** cuenta solo turnos **activos** dentro del rango. Sin fechas usa los últimos 30 días hasta hoy (según `APP_TIMEZONE`) y devuelve en `from` y `to` las fechas usadas; el rango máximo es de 366 días. El `summary` cubre todo el rango sin el filtro `attendance`, de modo que las tarjetas no cambian al filtrar la tabla. La **tasa de asistencia** es `asistió / (asistió + faltó)` con un decimal, o `null` si todavía no hay marcas.
+- **CSV:** UTF-8 con BOM (Excel respeta las tildes), separador coma y saltos CRLF. Las columnas son Fecha, Salida, Llegada, Ruta, Bus, Conductor, Colaborador, DNI, Asistencia, Marcado (hora en la zona de la app) y Marcado por. Las celdas que empiezan con `=`, `+`, `-` o `@` se prefijan con `'` para que un nombre malicioso no se ejecute como fórmula en Excel. Máximo 50 000 filas por exportación. Viaja con `Cache-Control: no-store` por contener datos personales.
+- **Descarga desde el navegador:** requiere el token, así que la web la hace con `fetch` y un Blob. La API expone `Content-Disposition` por CORS para que el navegador pueda leer el nombre del archivo.
+- Todo queda en `audit_logs` (`REPORT_*`).
+
 ## Deuda conocida
 
 - La unicidad de rutas, horarios y placas (sin distinguir mayúsculas) se valida en el servicio, no en la base: dos peticiones idénticas simultáneas podrían colarse. Cerrarlo requiere una migración con índices únicos (en rutas, sobre `lower(origin), lower(destination)`).
@@ -98,6 +113,8 @@ npm test --workspace @airova/api
 - Los selectores del formulario de turnos cargan hasta 100 opciones por lista (límite de paginación de la API); con más datos habrá que usar un selector con búsqueda.
 - La concurrencia de turnos está implementada con el candado, pero los tests usan una base embebida de una sola conexión, así que no hay una prueba con peticiones realmente simultáneas.
 - No hay asignación de asiento concreto por pasajero (solo conteo contra la capacidad).
+- La exportación es solo CSV; no hay PDF ni Excel nativo.
+- El formulario de informes calcula "hasta hoy" con la fecha del navegador, mientras la API usa `APP_TIMEZONE`; si difieren puede haber un desfase de un día en los turnos de hoy.
 
 ## Tests
 

@@ -41,7 +41,8 @@ function send(path: string, init: RequestInit): Promise<Response> {
   return fetch(`${API_URL}${path}`, { ...init, headers, credentials: 'include' });
 }
 
-export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+/** Envía la petición y, ante un 401, renueva la sesión y reintenta una vez. */
+async function request(path: string, init: RequestInit): Promise<Response> {
   let response = await send(path, init);
 
   // El access token dura 15 min: ante un 401 se renueva la sesión y se reintenta una vez.
@@ -52,11 +53,47 @@ export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise
       window.dispatchEvent(new Event(AUTH_EXPIRED_EVENT));
     }
   }
+  return response;
+}
 
-  if (!response.ok) {
-    const body = await response.json().catch(() => null);
-    throw new ApiError(response.status, errorMessage(body));
-  }
+async function failure(response: Response): Promise<ApiError> {
+  const body = await response.json().catch(() => null);
+  return new ApiError(response.status, errorMessage(body));
+}
 
+export async function apiFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
+  const response = await request(path, init);
+  if (!response.ok) throw await failure(response);
   return response.status === 204 ? (undefined as T) : ((await response.json()) as T);
+}
+
+/** Nombre del archivo según Content-Disposition (`filename*=UTF-8''…` o `filename="…"`). */
+export function filenameFrom(disposition: string | null, fallback: string): string {
+  if (!disposition) return fallback;
+  const encoded = /filename\*=UTF-8''([^;]+)/i.exec(disposition)?.[1];
+  if (encoded) {
+    try {
+      return decodeURIComponent(encoded.trim());
+    } catch {
+      /* se prueba con el nombre simple */
+    }
+  }
+  const plain = /filename="?([^";]+)"?/i.exec(disposition)?.[1];
+  return plain?.trim() || fallback;
+}
+
+/**
+ * Descarga un archivo con la sesión (Bearer): un enlace directo no sirve porque el token vive
+ * solo en memoria. Devuelve el contenido y el nombre sugerido por el servidor.
+ */
+export async function apiBlob(
+  path: string,
+  fallbackFilename = 'descarga',
+): Promise<{ blob: Blob; filename: string }> {
+  const response = await request(path, {});
+  if (!response.ok) throw await failure(response);
+  return {
+    blob: await response.blob(),
+    filename: filenameFrom(response.headers.get('Content-Disposition'), fallbackFilename),
+  };
 }

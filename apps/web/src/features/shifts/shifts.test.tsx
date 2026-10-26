@@ -394,6 +394,14 @@ describe('detalle del turno y pasajeros', () => {
     expect(table.getByLabelText('Asistencia de Beta Benites')).toHaveValue('PRESENT');
   });
 
+  it('ofrece crear un informe del turno, con el turno ya preseleccionado', async () => {
+    mockApi((url) => (url.pathname === '/shifts/s-1' ? json(200, detail()) : json(404, {})));
+    renderAt('/turnos/s-1');
+
+    const link = await screen.findByRole('link', { name: 'Crear informe' });
+    expect(link).toHaveAttribute('href', '/reportes/nuevo?shiftId=s-1');
+  });
+
   it('asigna pasajeros eligiendo entre los colaboradores libres', async () => {
     mockApi((url, init) => {
       if (init.method === 'POST') return json(201, detail());
